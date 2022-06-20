@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post">
+    Nhập tiêu đề <input type="text" name="title" th:value="${post.getTitle()}">
+    <br>
+    Nhập nội dung <input type="text" name="content" th:value="${post.getContent()}">
+    <br>
+    <input type="submit" value="Sửa bài viết">
+</form>
+</body>
+</html>

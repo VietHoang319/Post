@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="get" action="/search">
+    <input type="text" name="title" placeholder="Nhập tiêu đề bài viết">
+    <input type="datetime-local" name="dateFrom">
+    <input type="datetime-local" name="dateTo">
+    <input type="submit" value="tìm kiếm">
+</form>
+<br>
+<a href="/create">Tạo bài mới</a>
+<a href="/orderbylikes">Sắp xếp theo số lai tăng dần</a>
+<a href="/findpostnewest">Top 4 bài viết mới nhất</a>
+<table border="1">
+    <tr>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Create At</th>
+        <th>Likes</th>
+        <th colspan="3"></th>
+    </tr>
+    <div th:each="post: ${posts}" >
+        <tr>
+            <td><span th:text="${post.getTitle()}"></span></td>
+            <td><span th:text="${post.getContent()}"></span></td>
+            <td><span th:text="${post.getCreateAt()}"></span></td>
+            <td><span th:text="${post.getLikes()}"></span></td>
+            <td><a th:href="@{/like/__${post.getId()}__}">Like</a></td>
+            <td><a th:href="@{/edit/__${post.getId()}__}">Update</a></td>
+            <td><a th:href="@{/delete/__${post.getId()}__}">Delete</a></td>
+        </tr>
+    </div>
+</table>
+<div>
+    <a th:href="@{'/'(page=${posts.number - 1})}" th:if="${posts.hasNext()}">PreviouPrevious</a>
+    <span th:text="${posts.number}"></span>/<span th:text="${posts.totalPages}"></span>
+    <a th:href="@{'/'(page=${posts.number + 1})}" th:if="${posts.hasNext()}">Next</a>
+</div>
+</body>
+</html>
