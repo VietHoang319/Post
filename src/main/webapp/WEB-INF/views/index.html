@@ -38,7 +38,7 @@
 </table>
 <div>
     <a th:href="@{'/'(page=${posts.number - 1})}" th:if="${posts.hasNext()}">PreviouPrevious</a>
-    <span th:text="${posts.number}"></span>/<span th:text="${posts.totalPages}"></span>
+    <span th:text="${posts.number + 1}"></span>/<span th:text="${posts.totalPages}"></span>
     <a th:href="@{'/'(page=${posts.number + 1})}" th:if="${posts.hasNext()}">Next</a>
 </div>
 </body>

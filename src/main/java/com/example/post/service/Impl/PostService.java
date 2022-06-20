@@ -37,8 +37,8 @@ public class PostService implements com.example.post.service.IPostService {
     }
 
     @Override
-    public Iterable<Post> findByTitle(String title, LocalDateTime dateFrom, LocalDateTime dateTo) {
-        return postRepository.findByTitleAndCreateAt(title, dateFrom, dateTo);
+    public Page<Post> findByTitle(String title, LocalDateTime dateFrom, LocalDateTime dateTo, Pageable pageable) {
+        return postRepository.findByTitleAndCreateAt(title, dateFrom, dateTo, pageable);
     }
 
     @Override

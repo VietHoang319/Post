@@ -17,6 +17,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     Iterable<Post> findAllPostOrderByLikesDesc();
     @Query(value = "select * from post order by createAt desc limit 4" ,nativeQuery = true)
     Iterable<Post> findTop4PostNewest();
-    @Query(value = "from Post where title like :title and createAt between :dateFrom and :dateTo")
-    Iterable<Post> findByTitleAndCreateAt(@Param("title") String title, @Param("dateFrom") LocalDateTime dateFrom, @Param("dateTo")LocalDateTime dateTo);
+    @Query(value = "select * from post where title like :title and createAt between :dateFrom and :dateTo", nativeQuery = true)
+    Page<Post> findByTitleAndCreateAt(@Param("title") String title, @Param("dateFrom") LocalDateTime dateFrom, @Param("dateTo")LocalDateTime dateTo, Pageable pageable);
 }

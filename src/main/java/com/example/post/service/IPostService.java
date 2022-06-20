@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import java.time.LocalDateTime;
 
 public interface IPostService extends GeneralService<Post> {
-    Iterable<Post> findByTitle(String title, LocalDateTime dateFrom, LocalDateTime dateTo);
+    Page<Post> findByTitle(String title, LocalDateTime dateFrom, LocalDateTime dateTo, Pageable pageable);
     Iterable<Post> findAllByOrOrderByLikes();
     Iterable<Post> findTopByCreateAt();
 }

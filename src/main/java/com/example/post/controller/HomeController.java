@@ -23,7 +23,7 @@ public class HomeController {
     IPostService IPostService;
 
     @GetMapping
-    public ModelAndView showHome(ModelAndView modelAndView ,@PageableDefault(value = 5) Pageable pageable) {
+    public ModelAndView showHome(ModelAndView modelAndView, @PageableDefault(value = 4) Pageable pageable) {
         Page<Post> posts = IPostService.findAll(pageable);
         modelAndView = new ModelAndView("index");
         modelAndView.addObject("posts", posts);
@@ -63,12 +63,12 @@ public class HomeController {
     }
 
     @GetMapping("/search")
-    public ModelAndView search(ModelAndView modelAndView, @RequestParam String title, @RequestParam String dateFrom, @RequestParam String dateTo) {
+    public ModelAndView search(ModelAndView modelAndView, @RequestParam String title, @RequestParam String dateFrom, @RequestParam String dateTo, @PageableDefault(value = 4) Pageable pageable) {
         if ((dateFrom.equals("") && dateTo.equals(""))) {
             dateFrom = "1900-01-01T00:00:00";
             dateTo = String.valueOf(LocalDateTime.now());
         }
-        Iterable<Post> posts = IPostService.findByTitle('%' + title + '%', LocalDateTime.parse(dateFrom), LocalDateTime.parse(dateTo));
+        Iterable<Post> posts = IPostService.findByTitle('%' + title + '%', LocalDateTime.parse(dateFrom), LocalDateTime.parse(dateTo), pageable);
         modelAndView = new ModelAndView("index");
         modelAndView.addObject("posts", posts);
         return modelAndView;
